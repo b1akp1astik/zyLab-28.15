@@ -1,10 +1,37 @@
-//URL for Github repository: https://github.com/b1akp1astik/zyLab-28.15.git
-//Team membr 1: Harley Gribble
-//
 #include <iostream>
+#include "PlaylistNode.h"
+
 using namespace std;
 
-int main()
-{
-  return 0;
+//step 3 - implement PrintMenu function
+void PrintMenu(const string playlistTitle) {
+   cout << playlistTitle << " PLAYLIST MENU" << endl;
+   cout << "a - Add song" << endl;
+   cout << "d - Remove song" << endl;
+   cout << "c - Change position of song" << endl;
+   cout << "s - Output songs by specific artist" << endl;
+   cout << "t - Output total time of playlist (in seconds)" << endl;
+   cout << "o - Output full playlist" << endl;
+   cout << "q - Quit" << endl;
+   
 }
+
+PlaylistNode* ExecuteMenu(char option, string playlistTitle, PlaylistNode* headNode) {
+   /* Type your code here */
+   
+}
+
+int main() {
+   
+  string playListTitle;
+
+  //step 2 prompt for playlist title
+  cout << "Enter playlist's title: " << endl;
+  cin >> playListTitle;
+
+  PrintMenu(playListTitle);
+
+   
+   return 0;
+}
+
