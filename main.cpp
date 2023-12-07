@@ -106,6 +106,67 @@ PlaylistNode* ExecuteMenu(char option, string playlistTitle, PlaylistNode* head)
 
   }
 
+
+//step 9: implement change position of song menu
+  else if(option == 'c'){
+    int currPos;
+    int newPos;
+    int n;
+    cout << "CHANGE POSITION OF SONG\nEnter song's current position:" << endl;
+    cin >> currPos;
+    cout << "Enter new position for song:" << endl;
+    cin >> newPos;
+
+    PlaylistNode* first = head->GetNext();
+    PlaylistNode* currPrev = head;
+    PlaylistNode* currPosit = head;
+    PlaylistNode* newPrev = head;
+    PlaylistNode* newPosit = head;
+    PlaylistNode* last = head;
+    PlaylistNode* tmp = first;
+
+//if choice less than size of list move to first posit
+    for(n=1;n<=currPos;n++){
+      currPrev = currPosit;
+      currPosit = currPosit->GetNext();
+    }
+
+    if(newPos<1){
+      PlaylistNode* headTmp = head;
+      PlaylistNode* currTmp = currPosit;
+
+      currPrev->SetNext(currTmp->GetNext());
+      currPosit->SetNext(headTmp->GetNext());
+      head->SetNext(currPosit);
+
+      return head;
+    }
+    else {
+    for(n=1;n<=newPos;n++){
+      newPrev = newPosit;
+      newPosit = newPosit->GetNext();
+    }
+    }
+
+    while(tmp != nullptr){
+      last = last->GetNext();
+      tmp = tmp->GetNext();
+    }
+
+    /*
+    head->PrintPlaylistNode();
+    first->PrintPlaylistNode();
+    currPrev->PrintPlaylistNode();
+    currPosit->PrintPlaylistNode();
+    newPrev->PrintPlaylistNode();
+    newPosit->PrintPlaylistNode();
+    last->PrintPlaylistNode();
+    */
+
+
+
+  }
+
   return head;
 }
 
