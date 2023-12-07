@@ -57,10 +57,11 @@ void PlaylistNode::SetNext(PlaylistNode* nodePtr){
     this->nextNodePtr = nodePtr;
 }
 
-// TODO: Write PrintSongInfo() function
+// prints playlist node
 void PlaylistNode::PrintPlaylistNode() {
         cout << "Unique ID: " << uniqueID << endl;
         cout << "Song Name: " << songName << endl;
         cout << "Artist Name: " << artistName << endl;
         cout << "Song Length (in seconds): " << songLength << endl;
+        cout << endl;
 	}
