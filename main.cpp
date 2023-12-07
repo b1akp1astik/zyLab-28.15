@@ -31,14 +31,14 @@ PlaylistNode* ExecuteMenu(char option, string playlistTitle, PlaylistNode* head)
   if (option == 'o'){
     cout << playlistTitle << " - OUTPUT FULL PLAYLIST" << endl;
 
-    if (head == nullptr){
-      cout << "Playlist is empty" << endl;
+    if (head == nullptr || head->GetNext() == nullptr){
+      cout << "Playlist is empty\n" << endl;
     }
 
-    else if(head->GetNext() == nullptr){
+    /*else if(head->GetNext() == nullptr){
       cout << 1 << "." << endl;
       head->PrintPlaylistNode();
-    }
+    }*/
 
     else{
       PlaylistNode* currNode = head->GetNext();
@@ -238,7 +238,17 @@ PlaylistNode* ExecuteMenu(char option, string playlistTitle, PlaylistNode* head)
 
   //Step 11: Implement the "Output total time of playlist" menu option
   else if(option == 't'){
+    int totalTime = 0;
 
+    PlaylistNode* currNode = head->GetNext();
+
+    while(currNode != NULL){
+      totalTime+=currNode->GetSongLength();
+      currNode = currNode->GetNext();
+    }
+
+    cout << "OUTPUT TOTAL TIME OF PLAYLIST (IN SECONDS)" << endl;
+    cout << "Total time: " << totalTime << " seconds\n" << endl;
 
 
   }
