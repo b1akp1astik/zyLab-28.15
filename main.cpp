@@ -211,6 +211,38 @@ PlaylistNode* ExecuteMenu(char option, string playlistTitle, PlaylistNode* head)
     cout << endl;
   }
 
+
+  //step 10: implement output songs by artist menu option
+  else if(option == 's'){
+    string artistChoice;
+    cout << "OUTPUT SONGS BY SPECIFIC ARTIST\nEnter artist's name:" << endl;
+      cin.ignore();
+      getline(cin, artistChoice);
+
+    PlaylistNode* currNode = head->GetNext();
+
+    int i = 0;
+    cout << endl;
+    while(currNode != NULL){
+    i++;
+    if(currNode->GetArtistName()==artistChoice){
+    cout << i << "." << endl;
+    currNode->PrintPlaylistNode();
+    }
+    currNode = currNode->GetNext();
+    }
+
+
+
+  }
+
+  //Step 11: Implement the "Output total time of playlist" menu option
+  else if(option == 't'){
+
+
+
+  }
+
   return head;
 }
 
