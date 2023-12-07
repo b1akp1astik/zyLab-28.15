@@ -112,6 +112,7 @@ PlaylistNode* ExecuteMenu(char option, string playlistTitle, PlaylistNode* head)
     int currPos;
     int newPos;
     int n;
+    int lastPos = 0;
     cout << "CHANGE POSITION OF SONG\nEnter song's current position:" << endl;
     cin >> currPos;
     cout << "Enter new position for song:" << endl;
@@ -125,13 +126,15 @@ PlaylistNode* ExecuteMenu(char option, string playlistTitle, PlaylistNode* head)
     PlaylistNode* last = head;
     PlaylistNode* tmp = first;
 
-//if choice less than size of list move to first posit
+//determines position of node choice and previous node
     for(n=1;n<=currPos;n++){
       currPrev = currPosit;
       currPosit = currPosit->GetNext();
     }
 
+//if choice smaaller than list size default to placing at head
     if(newPos<1){
+      newPos = 1;
       PlaylistNode* headTmp = head;
       PlaylistNode* currTmp = currPosit;
 
@@ -139,21 +142,60 @@ PlaylistNode* ExecuteMenu(char option, string playlistTitle, PlaylistNode* head)
       currPosit->SetNext(headTmp->GetNext());
       head->SetNext(currPosit);
 
-      return head;
+
     }
     else {
-    for(n=1;n<=newPos;n++){
-      newPrev = newPosit;
-      newPosit = newPosit->GetNext();
-    }
-    }
 
+//finding last position
     while(tmp != nullptr){
       last = last->GetNext();
       tmp = tmp->GetNext();
+      lastPos++;
     }
 
+//if choice greater than list size default to end of list
+    if(newPos > lastPos){
+      newPos = lastPos;
+      PlaylistNode* lastTmp = last;
+      PlaylistNode* currTmp = currPosit;
+
+      currPrev->SetNext(currTmp->GetNext());
+      currPosit->SetNext(lastTmp->GetNext());
+      last->SetNext(currPosit);
+    }
+
+//move node to new position and rearrange pointers
+    else{
+
+
+      //remove node to be moved from list
+      PlaylistNode* currPositTmp = currPosit;
+
+      currPrev->SetNext(currPositTmp->GetNext());
+
+      //find new position
+      for(n=1;n<=newPos;n++){
+      newPrev = newPosit;
+      newPosit = newPosit->GetNext();
+    }
+
+      //PlaylistNode* currPositTmp = currPosit;
+
+      //currPrev->SetNext(currPositTmp->GetNext());
+
+      //relocate node at position
+      currPosit->SetNext(newPosit);
+      newPrev->SetNext(currPosit);
+
+    }
+    }
+
+
+
     /*
+    cout << "New pos is " << newPos << endl;
+    cout << "curr pos is " << currPos << endl;
+    cout << "last pos is " << lastPos << endl;
     head->PrintPlaylistNode();
     first->PrintPlaylistNode();
     currPrev->PrintPlaylistNode();
@@ -162,9 +204,11 @@ PlaylistNode* ExecuteMenu(char option, string playlistTitle, PlaylistNode* head)
     newPosit->PrintPlaylistNode();
     last->PrintPlaylistNode();
     */
+    
 
-
-
+//print results
+    cout << "\"" << currPosit->GetSongName() << "\" moved to position " << newPos << endl;
+    cout << endl;
   }
 
   return head;
